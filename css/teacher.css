@@ -1,0 +1,555 @@
+/* ------------------------------------------------------------------
+   teacher.css — styles shared by the Teacher*.html pages.
+   The sidebar, top bar, page heading, summary strip, table base and
+   .notice are NOT here — they live in portal.css, which every teacher
+   page loads first.
+
+   Load order: theme.css → portal.css → teacher.css
+   ------------------------------------------------------------------ */
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.3;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+.btn:hover { text-decoration: none; }
+
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover { background: var(--brand-dark); }
+
+.btn-sage { background: var(--sage); color: #f6f9f4; }
+.btn-sage:hover { background: #55664e; }
+
+.btn-ghost {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn-ghost:hover { border-color: var(--brand); color: var(--brand-dark); }
+
+.btn-sm { padding: 7px 12px; font-size: 12.5px; }
+
+.btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+
+/* ---------- form controls ---------- */
+.control {
+  width: 100%;
+  padding: 9px 11px;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: #fbf7ee;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.control:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(221, 169, 140, .38);
+  background: #fffdf8;
+}
+
+.control[aria-invalid="true"] { border-color: var(--danger); }
+
+textarea.control { resize: vertical; min-height: 110px; line-height: 1.55; }
+
+select.control { cursor: pointer; }
+
+/* ---------- toolbar above a roster ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.field-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--muted);
+}
+
+.field-inline .control {
+  min-width: 190px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.toolbar-spacer { flex: 1 1 auto; }
+
+/* accent tints for icons inside quick-action cards */
+.ico-sage  { background: var(--sage-bg);   color: var(--sage-ink); }
+.ico-brand { background: var(--brand-soft); color: var(--brand-dark); }
+.ico-gold  { background: var(--gold-bg);   color: var(--gold-ink); }
+
+/* saved / error feedback next to a toolbar button */
+.status {
+  align-self: center;
+  font-size: 12.5px;
+  color: var(--muted);
+  min-height: 1em;
+}
+
+.status.ok { color: var(--sage-ink); }
+.status.error { color: var(--danger); }
+
+/* empty states shown when no section is assigned to the teacher yet */
+.empty-cell {
+  padding: 20px 10px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.schedule-empty {
+  margin: 0;
+  padding: 18px 0 6px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- class cards ---------- */
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.class-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 18px 18px 14px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.class-card:nth-child(2) { border-top-color: var(--sage); }
+.class-card:nth-child(3) { border-top-color: #c2870b; }
+.class-card:nth-child(4) { border-top-color: #8a6f9e; }
+
+.class-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* the section leads — it is the list the Registrar posts and the teacher
+   manages; the subject taught in that section sits underneath */
+.class-section {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 680;
+  letter-spacing: -.2px;
+}
+
+.class-subject { margin: 3px 0 0; font-size: 12.5px; color: var(--muted); }
+
+.class-count {
+  flex: none;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.class-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 15px;
+  margin: 13px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.class-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.class-meta .ic { width: 14px; height: 14px; }
+
+.class-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* collapsible class list, so a card stays short until it is opened */
+.roster { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 4px; }
+
+.roster summary {
+  padding: 8px 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--brand-dark);
+  cursor: pointer;
+}
+
+.roster summary:hover { color: var(--brand); }
+
+.roster table { margin-top: 4px; }
+.roster th { padding: 0 8px 6px 0; font-size: 10px; }
+.roster td { padding: 7px 8px 7px 0; font-size: 12.5px; }
+.roster td:last-child, .roster th:last-child { padding-right: 0; text-align: right; }
+.roster td.id { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---------- attendance ---------- */
+.att-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.att-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: #f4ecdd;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 650;
+}
+
+.att-chip b { font-weight: 700; color: var(--ink); }
+.att-chip.present { background: var(--sage-bg); color: var(--sage-ink); }
+.att-chip.late    { background: var(--gold-bg); color: var(--gold-ink); }
+.att-chip.absent  { background: #f9e7e2; color: var(--danger); }
+.att-chip.excused { background: var(--brand-soft); color: var(--brand-dark); }
+
+/* segmented Present / Late / Absent / Excused control */
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fffdf8;
+}
+
+.seg label { position: relative; }
+
+.seg input {
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.seg span {
+  display: block;
+  padding: 5px 10px;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 650;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+
+.seg label:first-child span { border-left: 0; }
+.seg span:hover { background: #f6eee1; }
+
+.seg input:checked + span { color: #fff; }
+.seg input[value="present"]:checked + span { background: var(--sage); }
+.seg input[value="late"]:checked + span    { background: #b07c0a; }
+.seg input[value="absent"]:checked + span  { background: var(--danger); }
+.seg input[value="excused"]:checked + span { background: var(--brand); }
+
+.seg input:focus-visible + span {
+  outline: 2px solid var(--focus);
+  outline-offset: -3px;
+}
+
+td.att-name { font-weight: 620; }
+td.att-id { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.att-actions, th.att-actions { text-align: right; padding-right: 0; }
+
+/* ---------- grade book ---------- */
+.grade-table th, .grade-table td { text-align: right; }
+.grade-table th:first-child, .grade-table td:first-child,
+.grade-table th:nth-child(2), .grade-table td:nth-child(2) { text-align: left; }
+
+.grade-input {
+  width: 64px;
+  padding: 6px 7px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ink);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  background: #fbf7ee;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+.grade-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px rgba(221, 169, 140, .45);
+  background: #fffdf8;
+}
+
+.grade-input[aria-invalid="true"] { border-color: var(--danger); background: #fdf1ee; }
+
+td.final { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.final .pending { color: #c3b59c; font-weight: 600; }
+
+th.cur, td.cur { background: #fbf6ec; }
+th.cur { color: var(--brand-dark); }
+
+.grades-foot {
+  margin: 16px 0 0;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- announcements ---------- */
+.ann-form { display: grid; gap: 14px; }
+
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+
+.form-field label {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--muted);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 12px;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ann-list { display: grid; gap: 12px; }
+
+.ann-item {
+  background: #fffdf8;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--brand);
+  border-radius: 10px;
+  padding: 13px 15px;
+}
+
+.ann-item.new { border-left-color: var(--sage); }
+
+.ann-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ann-title { margin: 0; font-size: 14px; font-weight: 680; line-height: 1.35; }
+
+.ann-meta {
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.ann-audience {
+  display: inline-block;
+  margin-right: 7px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.ann-body {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.ann-del {
+  flex: none;
+  padding: 3px 6px;
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  color: var(--danger);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.ann-del:hover { background: #f9e7e2; }
+
+.ann-empty {
+  padding: 18px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.card-foot {
+  margin: 14px 0 0;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  font-weight: 650;
+}
+
+/* plain paragraph inside a card (e.g. the advisory note) */
+.card-note { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* ---------- dashboard ---------- */
+.dash-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.stack { display: grid; gap: 16px; }
+
+.schedule-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eae0cd;
+}
+
+.schedule-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.schedule-row:first-child { padding-top: 0; }
+
+.schedule-time {
+  flex: none;
+  width: 105px;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--brand-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.schedule-main { flex: 1 1 auto; min-width: 0; }
+.schedule-main .t { font-size: 13.5px; font-weight: 650; }
+.schedule-main .s { margin-top: 1px; font-size: 12px; color: var(--muted); }
+
+.quick-grid { display: grid; gap: 10px; }
+
+.quick {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: inherit;
+  background: #fffdf8;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.quick:hover {
+  border-color: var(--brand);
+  box-shadow: 0 4px 12px rgba(51, 41, 31, .09);
+  text-decoration: none;
+}
+
+.quick-ico {
+  width: 34px; height: 34px;
+  flex: none;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+}
+
+.quick-ico .ic { width: 18px; height: 18px; }
+
+.quick .t { display: block; font-size: 13px; font-weight: 650; }
+.quick .s { display: block; margin-top: 1px; font-size: 11.5px; color: var(--muted); }
+
+/* ---------- logout row (matches the student dashboard) ---------- */
+.logout-row { display: flex; justify-content: flex-end; margin-top: 24px; }
+
+.logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 650;
+  color: #fff4ef;
+  background: var(--danger);
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.logout:hover { background: #6f1810; }
+
+.disclaimer { margin: 26px 0 0; font-size: 11.5px; color: var(--muted); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 940px) {
+  .dash-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .form-row { grid-template-columns: 1fr; }
+  .toolbar { align-items: stretch; }
+  .field-inline .control { min-width: 0; }
+  .toolbar-spacer { display: none; }
+  .toolbar .btn { flex: 1 1 auto; }
+  .schedule-row { align-items: flex-start; flex-direction: column; gap: 3px; }
+  .schedule-time { width: auto; }
+  .seg span { padding: 5px 7px; font-size: 11px; }
+}

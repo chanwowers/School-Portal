@@ -1,0 +1,268 @@
+/* ------------------------------------------------------------------
+   login.css — styles for Login.html only.
+   Loaded AFTER css/theme.css, which supplies the colour tokens
+   (--bg, --brand, --ink …) used throughout this file.
+   ------------------------------------------------------------------ */
+
+:root { --radius: 14px; }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* campus photo, softened so the form stays readable */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("../pictures/schoolpic.jpg") center / cover no-repeat var(--bg);
+  filter: saturate(.92) contrast(.96) blur(2px);
+  transform: scale(1.05);
+}
+
+/* warm scrim in the photo's own tones */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(165deg,
+      rgba(242, 236, 224, .58) 0%,
+      rgba(176, 96, 63, .26) 48%,
+      rgba(51, 41, 31, .60) 100%);
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(253, 250, 244, .94);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, .65);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow:
+    0 20px 50px rgba(51, 41, 31, .30),
+    0 2px 6px rgba(51, 41, 31, .14);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  color: inherit;
+}
+
+.brand:hover { text-decoration: none; }
+
+.logo {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #c87a52, var(--brand-dark));
+  display: grid;
+  place-items: center;
+  color: #fff8f0;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: .5px;
+  box-shadow: inset 0 -2px 4px rgba(51, 41, 31, .25);
+}
+
+.brand-name { font-weight: 650; font-size: 16px; }
+.brand-sub { font-size: 12px; color: var(--sage); }
+
+h1 { font-size: 21px; margin: 0 0 4px; }
+.lede { margin: 0 0 22px; font-size: 13.5px; color: var(--muted); }
+
+/* One sign-in page for both portals; the dropdown decides where to go next. */
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.field { margin-bottom: 16px; }
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: #fbf7ee;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+/* account-type dropdown — matches the text inputs above, with a custom arrow */
+.select-wrap { position: relative; }
+
+.select-wrap select {
+  width: 100%;
+  padding: 11px 38px 11px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: #fbf7ee;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.select-wrap select:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(221, 169, 140, .48);
+  background: #fffdf8;
+}
+
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  width: 15px;
+  height: 15px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+input::placeholder { color: #a3927c; }
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(221, 169, 140, .48);
+  background: #fffdf8;
+}
+
+input[aria-invalid="true"] { border-color: var(--danger); }
+
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 62px; }
+
+.toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  border: 0;
+  background: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand);
+  cursor: pointer;
+}
+
+.toggle:hover { background: var(--brand-soft); }
+.toggle:focus-visible { outline: 2px solid var(--focus); }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 4px 0 20px;
+  font-size: 13px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.remember input { accent-color: var(--brand); width: 15px; height: 15px; }
+
+button.submit {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 650;
+  color: #fff;
+  background: var(--brand);
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+button.submit:hover { background: var(--brand-dark); }
+button.submit:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.error {
+  min-height: 0;
+  font-size: 12.5px;
+  color: var(--danger);
+  margin-top: 6px;
+}
+
+.alert {
+  display: none;
+  margin-bottom: 18px;
+  padding: 10px 12px;
+  font-size: 13px;
+  border-radius: 9px;
+  background: #f9e7e2;
+  border: 1px solid #e0b8ab;
+  color: var(--danger);
+}
+
+.alert.show { display: block; }
+
+.foot {
+  margin: 22px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* way back to the home page */
+.foot-links { margin: 0 0 7px; }
+
+.foot-links a { font-weight: 650; }
+
+.foot-note { margin: 0; }
+
+/* demo credentials, so the seeded accounts can be tried without digging
+   through js/store.js — remove this block for a real deployment */
+.foot-demo {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.foot-demo strong { color: var(--ink); font-weight: 650; }

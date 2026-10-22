@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Announcements — Teacher Portal</title>
+
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/portal.css?v=3">
+<link rel="stylesheet" href="css/teacher.css?v=4">
+
+<script defer src="js/portal.js?v=4"></script>
+<script defer src="js/store.js?v=3"></script>
+<script defer src="js/sync.js?v=1"></script>
+<script defer src="js/teacher.js?v=2"></script>
+<script defer src="js/teacher-announcements.js"></script>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-home" viewBox="0 0 24 24">
+    <path d="M3 10.5 12 3l9 7.5"/>
+    <path d="M5.5 9.6V20a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9.6"/>
+  </symbol>
+  <symbol id="i-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8.2" r="3.6"/>
+    <path d="M4.9 20.4a7.1 7.1 0 0 1 14.2 0"/>
+  </symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24">
+    <path d="M9 4.5H7a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6.5a2 2 0 0 0-2-2h-2"/>
+    <rect x="9" y="2.6" width="6" height="3.6" rx="1.2"/>
+    <path d="M9 11.5h6M9 15.2h4"/>
+  </symbol>
+  <symbol id="i-file" viewBox="0 0 24 24">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+    <path d="M14 3v5h5"/><path d="M8.8 13h6.4M8.8 16.4h4"/>
+  </symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24">
+    <path d="M20.5 11.6a7.9 7.9 0 0 1-11.6 7L4 20.2l1.6-4.7a7.9 7.9 0 1 1 14.9-3.9z"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/>
+    <path d="M3.5 9.9h17"/><path d="M8 3v4M16 3v4"/>
+  </symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24">
+    <path d="M18 9.5a6 6 0 1 0-12 0c0 5-2.2 6.6-2.2 6.6h16.4S18 14.5 18 9.5z"/>
+    <path d="M13.8 19.4a2.1 2.1 0 0 1-3.6 0"/>
+  </symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<div class="shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo"><img src="pictures/SchoolLogo.jpg" alt="" width="34" height="34"></div>
+      <div>
+        <div class="sb-name">CAANHS</div>
+        <div class="sb-sub">Teacher Portal</div>
+      </div>
+    </div>
+
+    <nav class="sb-nav" aria-label="Main" data-teacher="true">
+      <a href="TeacherDashboard.html"><svg class="ic"><use href="#i-home"/></svg>Dashboard</a>
+      <a href="TeacherClasses.html"><svg class="ic"><use href="#i-user"/></svg>Classes</a>
+      <a href="TeacherAttendance.html"><svg class="ic"><use href="#i-clipboard"/></svg>Attendance</a>
+      <a href="TeacherGrades.html"><svg class="ic"><use href="#i-file"/></svg>Grade Book</a>
+      <a href="TeacherAnnouncements.html" aria-current="page"><svg class="ic"><use href="#i-chat"/></svg>Announcements</a>
+      <a href="Calendar.html"><svg class="ic"><use href="#i-calendar"/></svg>Academic Calendar</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+
+    <header class="topbar">
+      <button class="icon-btn" id="navToggle" type="button"
+              aria-controls="sidebar" aria-expanded="true" aria-label="Hide menu">
+        <svg class="ic" id="navToggleIcon"><use href="#i-x"/></svg>
+      </button>
+
+      <div class="tb-title">
+        <svg class="ic"><use href="#i-chat"/></svg>
+        Announcements
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="tb-user" id="tbUser">EMP-00231</div>
+
+      <button class="icon-btn bell" type="button" aria-label="Notifications, 1 unread">
+        <svg class="ic"><use href="#i-bell"/></svg>
+        <span class="dot" aria-hidden="true"></span>
+      </button>
+
+      <div class="tb-avatar" aria-hidden="true">TR</div>
+    </header>
+
+    <main class="content">
+      <p class="crumb">You are here: <a href="TeacherDashboard.html">Teacher Dashboard</a> &rsaquo; Announcements</p>
+
+      <div class="page-head">
+        <h1>Announcements</h1>
+        <p><span id="annCount">2 posted</span> &middot; visible to the classes you choose</p>
+      </div>
+
+      <div class="dash-grid">
+        <section class="card">
+          <div class="card-head">
+            <svg class="ic"><use href="#i-chat"/></svg>
+            <h2>Post an announcement</h2>
+          </div>
+
+          <form id="annForm" class="ann-form" novalidate>
+            <div class="form-field">
+              <label for="annTitle">Title</label>
+              <input id="annTitle" class="control" type="text" autocomplete="off"
+                     placeholder="e.g. Quiz on Friday">
+            </div>
+
+            <div class="form-field">
+              <label for="annAudience">Audience</label>
+              <select id="annAudience" class="control"></select>
+            </div>
+
+            <div class="form-field">
+              <label for="annBody">Message</label>
+              <textarea id="annBody" class="control" rows="6"
+                        placeholder="What should your students know?"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <span class="status" id="annStatus" role="status"></span>
+              <button class="btn btn-primary" type="submit">Post announcement</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <svg class="ic"><use href="#i-chat"/></svg>
+            <h2>Posted announcements</h2>
+          </div>
+          <div class="ann-list" id="annList"></div>
+        </section>
+      </div>
+
+      <!-- =============================================================
+           DEMO DELIVERY — posts are saved to the school_portal MySQL
+           database under your teacher ID. Nothing is emailed or pushed
+           to students until the messaging system is connected.
+           ============================================================= -->
+      <p class="notice">
+        <strong>Demo delivery.</strong> Announcements are saved to the
+        <strong>school_portal</strong> database under your teacher ID. Students will
+        not actually receive them until this page is connected to the school&rsquo;s
+        messaging or learning system.
+      </p>
+    </main>
+
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+
+</body>
+</html>

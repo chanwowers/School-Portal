@@ -1,0 +1,57 @@
+/* ------------------------------------------------------------------
+   grades.css — styles for Grades.html only.
+   The sidebar, top bar, page heading, summary strip, table base and
+   .notice are NOT here — they live in portal.css, which this page
+   loads first. This file is only the grade sheet's own blocks.
+
+   Load order: theme.css → portal.css → grades.css
+   ------------------------------------------------------------------ */
+
+/* ---------- grade sheet ---------- */
+/* Subject names are in; the scores are not posted yet, so every score
+   cell renders an em-dash. Adding a real grade later is just replacing
+   the <span class="pending"> with a <span class="score">. */
+
+td.subj {
+  color: var(--ink);
+  font-weight: 620;
+  white-space: nowrap;
+}
+
+th.score, td.score {
+  text-align: right;
+  padding-right: 0;
+  width: 1%;
+}
+
+td.score { font-variant-numeric: tabular-nums; font-weight: 650; }
+
+/* the quarter we are currently in, so the eye lands on the right column */
+th.cur, td.cur { background: #fbf6ec; }
+
+th.cur { color: var(--brand-dark); }
+
+/* a score cell with no grade yet */
+.pending { color: #c3b59c; font-weight: 600; }
+
+/* full-width message when there is no record or no assigned classroom */
+.empty-cell {
+  padding: 20px 10px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------- footer of the sheet ---------- */
+.grades-foot {
+  margin: 16px 0 0;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 620px) {
+  td.subj { white-space: normal; }
+}

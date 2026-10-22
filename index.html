@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAANHS — School Portal</title>
+
+<!-- theme.css first (shared tokens), then this page's own styles -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/home.css">
+
+<!-- defer: runs after the HTML is parsed, so the elements it grabs exist -->
+<script defer src="js/home.js?v=2"></script>
+</head>
+<body>
+
+<!-- Icon sprite. Inline because <use href="#id"> only resolves ids in the same
+     document, and an external .svg can't be fetched over file://. Dashboard.html
+     carries its own copy of the symbols it uses. -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-cap" viewBox="0 0 24 24">
+    <path d="M12 4 2.8 8.4 12 12.8l9.2-4.4z"/>
+    <path d="M6.6 10.5v4.8c0 1.7 2.4 3 5.4 3s5.4-1.3 5.4-3v-4.8"/>
+  </symbol>
+  <symbol id="i-target" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8.6"/>
+    <circle cx="12" cy="12" r="4.6"/>
+    <circle cx="12" cy="12" r="1.1"/>
+  </symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1z"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/>
+    <path d="M3.5 9.9h17"/><path d="M8 3v4M16 3v4"/>
+  </symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24">
+    <path d="M9 4.5H7a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6.5a2 2 0 0 0-2-2h-2"/>
+    <rect x="9" y="2.6" width="6" height="3.6" rx="1.2"/>
+    <path d="M9 11.5h6M9 15.2h4"/>
+  </symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24">
+    <path d="M18 9.5a6 6 0 1 0-12 0c0 5-2.2 6.6-2.2 6.6h16.4S18 14.5 18 9.5z"/>
+    <path d="M13.8 19.4a2.1 2.1 0 0 1-3.6 0"/>
+  </symbol>
+  <symbol id="i-login" viewBox="0 0 24 24">
+    <path d="M14.5 3H18a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3.5"/>
+    <path d="m8.5 16.5 4.5-4.5-4.5-4.5"/><path d="M13 12H4"/>
+  </symbol>
+  <symbol id="i-help" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9.2"/>
+    <path d="M9.6 9.4a2.5 2.5 0 0 1 4.9.6c0 1.7-2.5 2.2-2.5 3.9"/>
+    <path d="M12 17.5h.01"/>
+  </symbol>
+</svg>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="seal"><img src="pictures/SchoolLogo.jpg" alt="" width="38" height="38"></span>
+    <span>
+      <span class="brand-name">CAANHS</span>
+      <span class="brand-sub">CAA National High School</span>
+    </span>
+  </a>
+
+  <nav aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#mission">Mission &amp; Vision</a>
+    <a href="#portal">The Portal</a>
+    <a href="#news">Announcements</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="spacer"></div>
+
+  <a class="btn btn-sage" href="#enroll">
+    <svg class="ic"><use href="#i-clipboard"/></svg>
+    Enroll now
+  </a>
+
+  <a class="btn btn-primary" href="Login.html">
+    <svg class="ic"><use href="#i-login"/></svg>
+    Sign in
+  </a>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-seal">
+      <img src="pictures/SchoolLogo.jpg" alt="" width="104" height="104">
+    </div>
+
+    <span class="eyebrow">A.Y. 2026&ndash;2027 &middot; Enrollment open</span>
+
+    <h1>CAA National High School</h1>
+    <p class="portal-line">School Portal</p>
+
+    <p class="lede">Your grades, class schedule, enrollment, and school announcements
+       &mdash; all in one place. Students and faculty sign in with the same
+       school-issued account to continue.</p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary btn-lg" id="ctaSignin" href="Login.html">
+        <svg class="ic"><use href="#i-login"/></svg>
+        Sign in to the portal
+      </a>
+      <a class="btn btn-sage btn-lg" href="#enroll">
+        <svg class="ic"><use href="#i-clipboard"/></svg>
+        Enroll now
+      </a>
+      <a class="btn btn-ghost btn-lg" href="#about">About the school</a>
+    </div>
+
+    <p class="session-note" id="sessionNote" hidden></p>
+  </div>
+</section>
+
+<!-- ===================================================================
+     ONLINE ENROLLMENT
+     The buttons here are wired to the login page, not to a real enrollment
+     form — enrollment itself has no backend yet. The dates and the "not yet
+     live" notice are SAMPLE DATA; replace them with the Registrar's actual
+     schedule.
+     =================================================================== -->
+<section class="section" id="enroll">
+  <div class="section-head">
+    <h2>Online enrollment</h2>
+    <p>Enrollment for A.Y. 2026&ndash;2027 is open. Here is how to enroll from home.</p>
+  </div>
+
+  <div class="enroll">
+    <div class="enroll-main">
+      <span class="pill">Enrollment open</span>
+      <h3>Enroll in two steps</h3>
+
+      <ol class="steps">
+        <li><strong>Fill out the enrollment form.</strong> Your name, address, and
+            previous school are pre-filled from your record.</li>
+        <li><strong>Submit and wait for confirmation</strong> from the registrar. You will
+            be notified in the portal and by email.</li>
+      </ol>
+
+      <a class="btn btn-sage btn-lg" href="Login.html">
+        <svg class="ic"><use href="#i-login"/></svg>
+        Start online enrollment
+      </a>
+
+      <p class="enroll-note">
+         Online enrollment is still being set up &mdash; this
+        button takes you to the portal sign-in. Until the form goes live, submit your
+        requirements at the Registrar&rsquo;s Office, Monday to Friday, 8:00 AM &ndash;
+        5:00 PM.
+      </p>
+    </div>
+
+    <aside class="enroll-side">
+      <h3>What to prepare</h3>
+      <ul class="reqs">
+        <li>Report card (Form 138)</li>
+        <li>Certificate of good moral character</li>
+        <li>PSA birth certificate</li>
+        <li>Two 2&times;2 ID photos</li>
+      </ul>
+
+      <h3>Key dates</h3>
+      <ul class="dates">
+        <li><span>Enrollment opens</span><span>Sep 1, 2026</span></li>
+        <li><span>Last day to enroll</span><span>Sep 30, 2026</span></li>
+        <li><span>Classes begin</span><span>Oct 5, 2026</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- ===================================================================
+     PLACEHOLDER CONTENT
+     The About, Mission, Vision, and Core Values text in this section is
+     written as a stand-in. It is NOT the school's official wording.
+     Replace it with the statements from the school's own handbook or
+     website before this page goes anywhere public.
+     The Core Values names (Maka-Diyos, Makatao, Makakalikasan, Makabansa)
+     are the standard DepEd values and are safe to keep if the school
+     follows them.
+     =================================================================== -->
+
+<section class="section" id="about">
+  <div class="section-head">
+    <h2>About the school</h2>
+  </div>
+
+  <div class="about">
+    <div>
+      <p><strong>Established in <strong>1986</strong> as an extension of Las Piñas National High School, the school was created to accommodate the increasing number of students in the area.
+            In its early years, classes were conducted in the evening due to limited classroom facilities. 
+            Over time, the school expanded with the construction of additional buildings and an increase in student enrollment. 
+          In <strong> 2007</strong>, it became an independent institution through <strong>Republic Act No. 9452</strong> and was officially named <strong>CAA National High School.</strong> </p>      
+          <p><strong>The school was founded to bring quality secondary education closer to home for
+         families in the area, and has since grown into one of the city's larger public
+         high schools. Its academic programs are complemented by co-curricular
+         activities in sports, the arts, and student leadership.</strong></p>
+
+      <p><strong>This portal is the school's online window for learners and parents: grades,
+         schedules, enrollment, and official announcements, available whenever you
+         need them.</strong></p>
+    </div>
+
+    <div class="about-photo">
+      <img src="pictures/schoolpic.jpg" alt="The CAA National High School campus">
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="fact">
+      <div class="k">Established</div>
+      <div class="v">2003</div>
+    </div>
+    <div class="fact">
+      <div class="k">Location</div>
+      <div class="v">Las Pi&ntilde;as City</div>
+    </div>
+    <div class="fact">
+      <div class="k">School type</div>
+      <div class="v">Public secondary</div>
+    </div>
+    <div class="fact">
+      <div class="k">Programs</div>
+      <div class="v">Junior High</div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="mission">
+  <div class="band-inner">
+    <div class="section-head">
+      <h2>Mission &amp; Vision</h2>
+      <p>The direction that guides everything we do for our learners.</p>
+    </div>
+
+    <div class="mv">
+      <article class="mv-card mission">
+        <div class="mv-ico" aria-hidden="true"><svg class="ic"><use href="#i-compass"/></svg></div>
+        <h3>Our Mission</h3>
+        <p class="mv-statement">To provide quality, equitable, and learner-centered
+           basic education for every student.</p>
+        <p>We commit to a safe and supportive environment where learners are challenged
+           to think critically, act with integrity, and serve their community &mdash;
+           guided by capable teachers and supported by engaged parents and
+           stakeholders.</p>
+      </article>
+
+      <article class="mv-card vision">
+        <div class="mv-ico" aria-hidden="true"><svg class="ic"><use href="#i-target"/></svg></div>
+        <h3>Our Vision</h3>
+        <p class="mv-statement">A community of lifelong learners and principled
+           leaders.</p>
+        <p>We envision graduates of CAA National High School who are equipped with the
+           knowledge, skills, and values to succeed in higher education, the world of
+           work, and service to the nation.</p>
+      </article>
+    </div>
+
+    <div class="section-head sub">
+      <h2>Core values</h2>
+      <p>The values we hope every learner carries out of our gates.</p>
+    </div>
+
+    <div class="values">
+      <div class="value">
+        <div class="fil">Maka-Diyos</div>
+        <div class="en">For God</div>
+      </div>
+      <div class="value">
+        <div class="fil">Makatao</div>
+        <div class="en">For people</div>
+      </div>
+      <div class="value">
+        <div class="fil">Makakalikasan</div>
+        <div class="en">For nature</div>
+      </div>
+      <div class="value">
+        <div class="fil">Makabansa</div>
+        <div class="en">For country</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="portal">
+  <div class="section-head">
+    <h2>What&rsquo;s inside the portal</h2>
+    <p>Everything you need for the school year, available as soon as you sign in.</p>
+  </div>
+
+  <div class="features">
+    <article class="feature">
+      <div class="feature-ico ico-sage" aria-hidden="true"><svg class="ic"><use href="#i-cap"/></svg></div>
+      <h3>View grades</h3>
+      <p>Check your grades per subject and quarter, and track your general average
+         across the semester.</p>
+    </article>
+
+    <article class="feature">
+      <div class="feature-ico ico-brand" aria-hidden="true"><svg class="ic"><use href="#i-calendar"/></svg></div>
+      <h3>Academic calendar</h3>
+      <p>See exam weeks, suspension dates, and school events so nothing catches you
+         by surprise.</p>
+      <a class="feature-link" href="Calendar.html">View the calendar &rarr;</a>
+    </article>
+
+    <article class="feature">
+      <div class="feature-ico ico-gold" aria-hidden="true"><svg class="ic"><use href="#i-clipboard"/></svg></div>
+      <h3>Registration</h3>
+      <p>Enroll in your subjects and sections online, then confirm your schedule with
+         your adviser.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="news">
+  <div class="section-head">
+    <h2>Announcements</h2>
+    <p>Latest updates from the school. Sign in to see everything posted for your section.</p>
+  </div>
+
+  <div class="news">
+    <div class="news-item">
+      <div class="news-when">Sep 10</div>
+      <div>
+        <h3>Kathniel no more</h3>
+        <p>Break na ang kathniel</p>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-when">Sep 8</div>
+      <div>
+        <h3>Second quarter exam schedule</h3>
+        <p>Exams run Sept 29 &ndash; Oct 2. Check your room assignment under Schedule.</p>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-when">Sep 5</div>
+      <div>
+        <h3>Library inventory</h3>
+        <p>Return all borrowed books by Sept 19 to clear your account for enrollment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-head">
+    <h2>Contact us</h2>
+    <p>Account concerns are handled by the ICT Office.</p>
+  </div>
+
+  <div class="contact">
+    <div>
+      <h3>Visit us</h3>
+      <p>Narra Corner Receiver Streets<br>BF International Village<br>Las Pi&ntilde;as City</p>
+    </div>
+
+    <div>
+      <h3>Account concerns</h3>
+      <p>Forgotten passwords, locked accounts, and enrollment problems are reset at the
+         ICT Office. Bring a valid school ID.</p>
+    </div>
+
+    <div>
+      <h3>Office hours</h3>
+      <p>Monday to Friday<br>8:00 AM &ndash; 5:00 PM<br>Closed on holidays</p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <div>&copy; <span id="year">2026</span> CAA National High School &middot; Est. 2003</div>
+    <div class="foot-links">
+      <a href="#about">About</a>
+      <a href="#mission">Mission &amp; Vision</a>
+      <a href="#contact">Contact</a>
+      <a href="Login.html">Sign in</a>
+    </div>
+  </div>
+</footer>
+
+<button class="help" id="helpBtn" type="button" aria-label="Help">
+  <svg class="ic"><use href="#i-help"/></svg>
+</button>
+
+</body>
+</html>

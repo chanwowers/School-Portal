@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classes — Admin Portal</title>
+
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/portal.css?v=3">
+<link rel="stylesheet" href="css/teacher.css?v=4">
+<link rel="stylesheet" href="css/admin.css">
+
+<script defer src="js/portal.js?v=4"></script>
+<script defer src="js/store.js?v=3"></script>
+<script defer src="js/sync.js?v=1"></script>
+<script defer src="js/admin.js"></script>
+<script defer src="js/admin-classes.js"></script>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-home" viewBox="0 0 24 24">
+    <path d="M3 10.5 12 3l9 7.5"/>
+    <path d="M5.5 9.6V20a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9.6"/>
+  </symbol>
+  <symbol id="i-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8.2" r="3.6"/>
+    <path d="M4.9 20.4a7.1 7.1 0 0 1 14.2 0"/>
+  </symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24">
+    <path d="m12 3 8.5 4.4L12 11.8 3.5 7.4z"/>
+    <path d="m3.5 12.1 8.5 4.4 8.5-4.4"/>
+    <path d="m3.5 16.5 8.5 4.4 8.5-4.4"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/>
+    <path d="M3.5 9.9h17"/><path d="M8 3v4M16 3v4"/>
+  </symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24">
+    <path d="M9.5 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.5"/>
+    <path d="m15.5 16.5 4.5-4.5-4.5-4.5"/><path d="M20 12H9"/>
+  </symbol>
+</svg>
+
+<div class="shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo"><img src="pictures/SchoolLogo.jpg" alt="" width="34" height="34"></div>
+      <div>
+        <div class="sb-name">CAANHS</div>
+        <div class="sb-sub">Admin Portal</div>
+      </div>
+    </div>
+
+    <nav class="sb-nav" aria-label="Main" data-admin="true">
+      <a href="AdminDashboard.html"><svg class="ic"><use href="#i-home"/></svg>Dashboard</a>
+      <a href="AdminStudents.html"><svg class="ic"><use href="#i-user"/></svg>Students</a>
+      <a href="AdminClasses.html" aria-current="page"><svg class="ic"><use href="#i-layers"/></svg>Classes</a>
+      <a href="Calendar.html"><svg class="ic"><use href="#i-calendar"/></svg>Academic Calendar</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+
+    <header class="topbar">
+      <button class="icon-btn" id="navToggle" type="button"
+              aria-controls="sidebar" aria-expanded="true" aria-label="Hide menu">
+        <svg class="ic" id="navToggleIcon"><use href="#i-x"/></svg>
+      </button>
+
+      <div class="tb-title">
+        <svg class="ic"><use href="#i-layers"/></svg>
+        Classes
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="tb-user" id="tbUser">ADMIN-0001</div>
+
+      <div class="tb-avatar" aria-hidden="true">AD</div>
+    </header>
+
+    <main class="content">
+      <p class="crumb">You are here: <a href="AdminDashboard.html">Admin Dashboard</a> &rsaquo; Classes</p>
+
+      <div class="page-head">
+        <h1>Classes</h1>
+        <p id="classCount">3 classrooms &middot; 32 students placed</p>
+      </div>
+
+      <div class="admin-toolbar">
+        <p class="card-note">Assign a teacher to each section and manage the student roster.
+           A student can be in one classroom at a time.</p>
+        <span class="status" id="classStatus" role="status"></span>
+      </div>
+
+      <section class="class-grid" id="classroomList" aria-label="Classrooms"></section>
+
+      <div class="logout-row">
+        <button class="logout" id="signout" type="button">
+          <svg class="ic"><use href="#i-logout"/></svg>
+          Logout
+        </button>
+      </div>
+
+      <!-- =============================================================
+           DEMO SECTIONS — the seeded sections come from js/store.js.
+           Reassigning a teacher here changes what that teacher sees in
+           the Teacher portal on this browser. Replace with a server API
+           before real use.
+           ============================================================= -->
+      <p class="notice">
+        <strong>Saved to MySQL.</strong> Teacher and student assignments are written
+        to the <strong>school_portal</strong> database in XAMPP and cached in this
+        browser. The assigned teacher sees the section and roster on the Teacher
+        portal (for example <strong>EMP-00231</strong>), and a student moved here
+        sees the new section on their own dashboard after signing in.
+      </p>
+    </main>
+
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+
+</body>
+</html>

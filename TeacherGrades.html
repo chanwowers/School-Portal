@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grade Book — Teacher Portal</title>
+
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/portal.css?v=3">
+<link rel="stylesheet" href="css/teacher.css?v=4">
+
+<script defer src="js/portal.js?v=4"></script>
+<script defer src="js/store.js?v=3"></script>
+<script defer src="js/sync.js?v=1"></script>
+<script defer src="js/teacher.js?v=2"></script>
+<script defer src="js/teacher-grades.js?v=2"></script>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-home" viewBox="0 0 24 24">
+    <path d="M3 10.5 12 3l9 7.5"/>
+    <path d="M5.5 9.6V20a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9.6"/>
+  </symbol>
+  <symbol id="i-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8.2" r="3.6"/>
+    <path d="M4.9 20.4a7.1 7.1 0 0 1 14.2 0"/>
+  </symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24">
+    <path d="M9 4.5H7a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6.5a2 2 0 0 0-2-2h-2"/>
+    <rect x="9" y="2.6" width="6" height="3.6" rx="1.2"/>
+    <path d="M9 11.5h6M9 15.2h4"/>
+  </symbol>
+  <symbol id="i-file" viewBox="0 0 24 24">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+    <path d="M14 3v5h5"/><path d="M8.8 13h6.4M8.8 16.4h4"/>
+  </symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24">
+    <path d="M20.5 11.6a7.9 7.9 0 0 1-11.6 7L4 20.2l1.6-4.7a7.9 7.9 0 1 1 14.9-3.9z"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/>
+    <path d="M3.5 9.9h17"/><path d="M8 3v4M16 3v4"/>
+  </symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24">
+    <path d="M18 9.5a6 6 0 1 0-12 0c0 5-2.2 6.6-2.2 6.6h16.4S18 14.5 18 9.5z"/>
+    <path d="M13.8 19.4a2.1 2.1 0 0 1-3.6 0"/>
+  </symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<div class="shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo"><img src="pictures/SchoolLogo.jpg" alt="" width="34" height="34"></div>
+      <div>
+        <div class="sb-name">CAANHS</div>
+        <div class="sb-sub">Teacher Portal</div>
+      </div>
+    </div>
+
+    <nav class="sb-nav" aria-label="Main" data-teacher="true">
+      <a href="TeacherDashboard.html"><svg class="ic"><use href="#i-home"/></svg>Dashboard</a>
+      <a href="TeacherClasses.html"><svg class="ic"><use href="#i-user"/></svg>Classes</a>
+      <a href="TeacherAttendance.html"><svg class="ic"><use href="#i-clipboard"/></svg>Attendance</a>
+      <a href="TeacherGrades.html" aria-current="page"><svg class="ic"><use href="#i-file"/></svg>Grade Book</a>
+      <a href="TeacherAnnouncements.html"><svg class="ic"><use href="#i-chat"/></svg>Announcements</a>
+      <a href="Calendar.html"><svg class="ic"><use href="#i-calendar"/></svg>Academic Calendar</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+
+    <header class="topbar">
+      <button class="icon-btn" id="navToggle" type="button"
+              aria-controls="sidebar" aria-expanded="true" aria-label="Hide menu">
+        <svg class="ic" id="navToggleIcon"><use href="#i-x"/></svg>
+      </button>
+
+      <div class="tb-title">
+        <svg class="ic"><use href="#i-file"/></svg>
+        Grade Book
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="tb-user" id="tbUser">EMP-00231</div>
+
+      <button class="icon-btn bell" type="button" aria-label="Notifications, 1 unread">
+        <svg class="ic"><use href="#i-bell"/></svg>
+        <span class="dot" aria-hidden="true"></span>
+      </button>
+
+      <div class="tb-avatar" aria-hidden="true">TR</div>
+    </header>
+
+    <main class="content">
+      <p class="crumb">You are here: <a href="TeacherDashboard.html">Teacher Dashboard</a> &rsaquo; Grade Book</p>
+
+      <div class="page-head">
+        <h1>Grade Book</h1>
+        <p>Encode quarterly grades for one class at a time. The final grade appears
+           once all four quarters are filled.</p>
+      </div>
+
+      <section class="card">
+        <div class="toolbar">
+          <div class="field-inline">
+            <label for="classSelect">Class</label>
+            <select id="classSelect" class="control"></select>
+          </div>
+
+          <div class="toolbar-spacer"></div>
+
+          <span class="status" id="gradeStatus" role="status"></span>
+          <button class="btn btn-ghost btn-sm" id="exportCsv" type="button">Export CSV</button>
+          <button class="btn btn-primary btn-sm" id="saveGrades" type="button">Save grades</button>
+        </div>
+
+        <div class="table-scroll">
+          <table class="grade-table">
+            <caption class="sr-only" style="position:absolute;left:-9999px">
+              Quarterly grades for the selected class
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Student</th>
+                <th scope="col">Student ID</th>
+                <th scope="col">1st Quarter</th>
+                <th scope="col" class="cur">2nd Quarter</th>
+                <th scope="col">3rd Quarter</th>
+                <th scope="col">4th Quarter</th>
+                <th scope="col">Final</th>
+              </tr>
+            </thead>
+            <tbody id="gradeBody"></tbody>
+          </table>
+        </div>
+
+        <p class="grades-foot">
+          Grades must be whole numbers from 60 to 100. The shaded column is the
+          quarter currently in progress. A dash in Final means one or more quarters
+          are still missing.
+        </p>
+      </section>
+
+      <!-- =============================================================
+           SAMPLE GRADE BOOK — the class list is demo data. Entries are
+           saved to the school_portal MySQL database under your teacher
+           ID, and are mirrored in this browser as a cache.
+           ============================================================= -->
+      <p class="notice">
+        <strong>Saved to MySQL.</strong> Encoded grades are written to the
+        <strong>school_portal</strong> database under your teacher ID and appear in
+        each student&rsquo;s Grade Book. They are not yet submitted to the Registrar.
+        Use Export CSV for a copy you can print or turn in.
+      </p>
+    </main>
+
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+
+</body>
+</html>

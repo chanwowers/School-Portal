@@ -1,0 +1,616 @@
+/* ------------------------------------------------------------------
+   home.css — styles for index.html (the landing page) only.
+   Loaded AFTER css/theme.css, which supplies the colour tokens
+   (--bg, --brand, --ink …) used throughout this file.
+   ------------------------------------------------------------------ */
+
+:root {
+  --radius: 14px;
+  --shell: #8d4a2e;
+
+  /* accent tints, all within the warm palette */
+  --sage-bg: #e7ece3;  --sage-ink: #4f6147;
+  --gold-bg: #f7ecd5;  --gold-ink: #855c05;
+}
+
+body { font-size: 15px; line-height: 1.6; }
+
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 650;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+.btn:hover { text-decoration: none; }
+
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover { background: var(--brand-dark); }
+
+.btn-lg { padding: 13px 24px; font-size: 15px; border-radius: 10px; }
+
+/* for use over the hero photo */
+.btn-ghost {
+  background: rgba(253, 246, 236, .12);
+  border-color: rgba(253, 246, 236, .45);
+  color: #fdf6ec;
+}
+
+.btn-ghost:hover { background: rgba(253, 246, 236, .22); }
+
+/* enrollment gets the sage accent, so it reads apart from terracotta sign-in */
+.btn-sage { background: var(--sage); color: #f6f9f4; }
+.btn-sage:hover { background: #55664e; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 10px 22px;
+  background: rgba(253, 250, 244, .93);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  color: inherit;
+}
+
+.brand:hover { text-decoration: none; }
+
+/* the seal is a circle in a square JPG — clip the white corners off */
+.seal {
+  width: 38px; height: 38px; flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.seal img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* these are spans inside the brand link, so they need to be told to stack */
+.brand-name {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  line-height: 1.2;
+}
+
+.brand-sub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--sage);
+  line-height: 1.2;
+}
+
+.topbar nav { display: flex; gap: 4px; flex-wrap: wrap; }
+
+.topbar nav a {
+  padding: 6px 11px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.topbar nav a:hover { background: var(--brand-soft); color: var(--brand-dark); text-decoration: none; }
+
+.spacer { flex: 1 1 auto; }
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 66px 22px 78px;
+  text-align: center;
+  color: #fdf6ec;
+  background: url("../pictures/schoolpic.jpg") center 38% / cover no-repeat var(--brand-dark);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(178deg,
+    rgba(38, 30, 22, .70) 0%,
+    rgba(51, 41, 31, .74) 52%,
+    rgba(51, 41, 31, .88) 100%);
+}
+
+.hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+/* white disc so the seal reads as a deliberate badge, not a pasted square */
+.hero-seal {
+  width: 104px; height: 104px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(20, 14, 9, .45);
+}
+
+.hero-seal img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(253, 246, 236, .16);
+  border: 1px solid rgba(253, 246, 236, .3);
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: .4px;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -.5px;
+  line-height: 1.15;
+}
+
+.hero .portal-line {
+  margin: 0 0 16px;
+  font-size: 17px;
+  font-weight: 620;
+  color: #e9c9ae;
+  letter-spacing: .3px;
+}
+
+.hero .lede {
+  margin: 0 auto 28px;
+  max-width: 560px;
+  font-size: 15px;
+  color: #e6d8c6;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.session-note { margin: 18px 0 0; font-size: 12.5px; color: #d8c6b0; }
+
+/* ---------- sections ---------- */
+/* scroll-margin keeps an anchored section clear of the sticky top bar, so
+   links like index.html#about (from the login page) don't land with the
+   heading tucked underneath it */
+.section { max-width: 1100px; margin: 0 auto; padding: 58px 22px 0; scroll-margin-top: 82px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+.section-head { max-width: 640px; margin-bottom: 30px; }
+
+.section-head h2 { margin: 0 0 8px; font-size: 25px; font-weight: 680; letter-spacing: -.3px; }
+
+.section-head p { margin: 0; font-size: 14.5px; color: var(--muted); }
+
+/* a sub-heading inside a section, e.g. Core values under Mission & Vision */
+.section-head.sub { margin: 42px 0 0; }
+.section-head.sub h2 { font-size: 20px; }
+
+/* a tinted band, so the page has rhythm instead of one flat cream run */
+.band { background: var(--brand-soft); border-block: 1px solid #ecd8cb; margin-top: 58px; scroll-margin-top: 82px; }
+
+.band-inner { max-width: 1100px; margin: 0 auto; padding: 54px 22px; }
+
+.band .section-head { margin-bottom: 26px; }
+
+/* ---------- about ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.about p { margin: 0 0 15px; font-size: 14.5px; color: var(--muted); }
+.about p:last-child { margin-bottom: 0; }
+.about strong { color: var(--ink); font-weight: 650; }
+
+.about-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 28px rgba(51, 41, 31, .18);
+  aspect-ratio: 4 / 3;
+}
+
+.about-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* quick facts strip */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.fact {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.fact .k {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: var(--muted);
+}
+
+.fact .v { margin-top: 5px; font-size: 17px; font-weight: 680; line-height: 1.3; }
+
+/* ---------- mission & vision ---------- */
+.mv {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.mv-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.mv-card.vision { border-top-color: var(--sage); }
+
+.mv-ico {
+  width: 44px; height: 44px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+}
+
+.mv-ico .ic { width: 22px; height: 22px; }
+.mv-card.mission .mv-ico { background: var(--brand-soft); color: var(--brand-dark); }
+.mv-card.vision .mv-ico { background: var(--sage-bg); color: var(--sage-ink); }
+
+.mv-card h3 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .9px;
+  color: var(--brand-dark);
+}
+
+.mv-card.vision h3 { color: var(--sage-ink); }
+
+.mv-card .mv-statement {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: -.2px;
+}
+
+.mv-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ---------- core values ---------- */
+.values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.value {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.value .fil { font-size: 16px; font-weight: 700; color: var(--brand-dark); }
+.value .en { margin-top: 4px; font-size: 12.5px; color: var(--muted); }
+
+/* ---------- online enrollment ---------- */
+.enroll {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.enroll-main {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--sage);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.pill {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--sage-bg);
+  color: var(--sage-ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+}
+
+.enroll-main h3 { margin: 0 0 18px; font-size: 18px; font-weight: 680; }
+
+/* numbered steps, drawn with a CSS counter so the markup stays a plain <ol> */
+.steps {
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  position: relative;
+  padding: 0 0 16px 40px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.steps li:last-child { padding-bottom: 0; }
+
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--sage-bg);
+  color: var(--sage-ink);
+  display: grid;
+  place-items: center;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.steps strong { color: var(--ink); font-weight: 650; }
+
+.enroll-note {
+  margin: 16px 0 0;
+  padding: 11px 14px;
+  border-radius: 9px;
+  background: var(--gold-bg);
+  color: var(--gold-ink);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.enroll-note strong { font-weight: 700; }
+
+.enroll-side {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.enroll-side h3 {
+  margin: 0 0 13px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--muted);
+}
+
+.enroll-side ul { margin: 0 0 24px; padding: 0; list-style: none; }
+.enroll-side ul:last-child { margin-bottom: 0; }
+
+.reqs li {
+  position: relative;
+  padding: 0 0 9px 20px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.reqs li:last-child { padding-bottom: 0; }
+
+.reqs li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.dates li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eae0cd;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.dates li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.dates li span:last-child {
+  font-weight: 650;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* ---------- feature cards ---------- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.feature {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.feature-ico {
+  width: 46px; height: 46px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+}
+
+.feature-ico .ic { width: 23px; height: 23px; }
+
+.ico-sage  { background: var(--sage-bg);   color: var(--sage-ink); }
+.ico-brand { background: var(--brand-soft); color: var(--brand-dark); }
+.ico-gold  { background: var(--gold-bg);   color: var(--gold-ink); }
+
+.feature h3 { margin: 0 0 7px; font-size: 16px; font-weight: 650; }
+.feature p { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+/* a card that leads somewhere, e.g. Academic calendar → Calendar.html */
+.feature-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+/* ---------- announcements ---------- */
+.news {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 22px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.news-item {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid #eae0cd;
+}
+
+.news-item:last-child { border-bottom: 0; }
+
+.news-when {
+  flex: none;
+  width: 62px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--sage);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.news-item h3 { margin: 0 0 3px; font-size: 15px; font-weight: 650; }
+.news-item p { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+/* ---------- contact ---------- */
+.contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.contact h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 650; }
+.contact p { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+/* ---------- footer ---------- */
+.foot {
+  margin-top: 62px;
+  border-top: 1px solid var(--line);
+  background: var(--card);
+}
+
+.foot-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 26px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.foot-links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px) {
+  .topbar { flex-wrap: wrap; padding: 10px 16px; gap: 10px; }
+  .topbar nav { order: 3; width: 100%; }
+  .hero { padding: 52px 18px 62px; }
+  .hero h1 { font-size: 30px; }
+  .hero-seal { width: 88px; height: 88px; }
+  .section { padding: 44px 16px 0; }
+  .section-head h2 { font-size: 21px; }
+  .band { margin-top: 44px; }
+  .band-inner { padding: 40px 16px; }
+  .about { grid-template-columns: 1fr; gap: 24px; }
+  .about-photo { order: -1; }          /* photo leads on narrow screens */
+  .enroll { grid-template-columns: 1fr; }
+  .news-item { flex-direction: column; gap: 4px; }
+  .news-when { width: auto; }
+  .foot-inner { padding: 22px 16px; }
+}
+
+@media (max-width: 480px) {
+  .cta-row .btn { width: 100%; }
+  .mv-card { padding: 22px 18px; }
+  .mv-card .mv-statement { font-size: 16px; }
+}

@@ -1,0 +1,250 @@
+/* ------------------------------------------------------------------
+   courses.css — styles for Courses.html only.
+   The sidebar, top bar, page heading, summary strip and .notice are
+   NOT here — they live in portal.css, which this page loads first.
+   This file styles the course cards, assessment rows and filters.
+
+   Load order: theme.css → portal.css → courses.css
+   ------------------------------------------------------------------ */
+
+/* ---------- filter bar ---------- */
+.course-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 16px;
+}
+
+/* the flex rule above would otherwise win over the hidden attribute */
+.course-toolbar[hidden] { display: none; }
+
+/* shown while no teacher has posted any assessments yet */
+.course-empty-note {
+  margin: 0 0 16px;
+  padding: 13px 16px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: #fbf7ee;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.course-empty-note[hidden] { display: none; }
+
+.filters {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  background: #efe6d6;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.filter {
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+
+.filter:hover { color: var(--ink); background: #faf4e9; }
+
+.filter.is-active {
+  background: var(--card);
+  color: var(--brand-dark);
+  box-shadow: 0 1px 3px rgba(51, 41, 31, .12);
+}
+
+.filter:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+.course-status { font-size: 12.5px; color: var(--muted); }
+
+/* ---------- course cards ---------- */
+.course-list { display: grid; gap: 16px; }
+
+.course-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 18px 18px 6px;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, .05);
+}
+
+.course-card:nth-child(4n + 2) { border-top-color: var(--sage); }
+.course-card:nth-child(4n + 3) { border-top-color: #c2870b; }
+.course-card:nth-child(4n + 4) { border-top-color: #8a6f9e; }
+
+/* a course with no assessments yet: the header is the whole card */
+.course-card.is-empty { padding-bottom: 18px; }
+.course-card.is-empty .course-head { padding-bottom: 0; border-bottom: 0; }
+
+.course-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.course-mark {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+.course-mark.tone-sage { background: var(--sage-bg); color: var(--sage-ink); }
+.course-mark.tone-gold { background: var(--gold-bg); color: var(--gold-ink); }
+.course-mark.tone-plum { background: #efe7f3; color: #6f5580; }
+
+.course-title { flex: 1 1 auto; min-width: 0; }
+
+.course-title h2 {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 680;
+  letter-spacing: -.2px;
+}
+
+.course-teacher { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 14px;
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.course-count {
+  flex: none;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- assessments ---------- */
+.assess-list { display: grid; }
+
+.assess {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #eae0cd;
+}
+
+.assess:last-child { border-bottom: 0; }
+
+.assess-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.assess-title { margin: 0; font-size: 13.5px; font-weight: 650; }
+
+.assess-desc {
+  margin: 5px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.assess-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 132px;
+  text-align: right;
+}
+
+.assess-type {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.type-quiz { background: var(--brand-soft); color: var(--brand-dark); }
+.type-assignment { background: var(--sage-bg); color: var(--sage-ink); }
+.type-project { background: var(--gold-bg); color: var(--gold-ink); }
+.type-performance { background: #efe7f3; color: #6f5580; }
+.type-exam { background: #f9e7e2; color: var(--danger); }
+
+.assess-status {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.assess-status.pending { background: var(--gold-bg); color: var(--gold-ink); }
+.assess-status.submitted { background: var(--brand-soft); color: var(--brand-dark); }
+.assess-status.graded { background: var(--sage-bg); color: var(--sage-ink); }
+
+.assess-date { font-size: 11.5px; color: var(--muted); }
+
+.assess-score {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.assess-score .assess-points { color: var(--muted); font-weight: 600; }
+
+.course-empty {
+  padding: 22px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 620px) {
+  .course-head { flex-wrap: wrap; }
+  .course-count { order: 3; }
+  .assess { grid-template-columns: 1fr; gap: 8px; }
+  .assess-side {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    text-align: left;
+  }
+}

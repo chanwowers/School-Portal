@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in — School Portal</title>
+
+<!-- theme.css first (shared tokens), then this page's own styles -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/login.css?v=3">
+
+<!-- defer: runs after the HTML is parsed, so the elements it grabs exist -->
+<script defer src="js/store.js?v=3"></script>
+<script defer src="js/sync.js?v=1"></script>
+<script defer src="js/login.js?v=5"></script>
+</head>
+<body>
+
+<main class="card">
+  <a class="brand" href="index.html">
+    <div class="logo" aria-hidden="true">SP</div>
+    <div>
+      <div class="brand-name">School Portal</div>
+      <div class="brand-sub">Students &amp; Faculty</div>
+    </div>
+  </a>
+
+  <h1>Sign in</h1>
+  <p class="lede">Students and teachers use the same sign-in. Pick your account type below.</p>
+
+  <div class="alert" id="alert" role="alert"></div>
+
+  <form id="loginForm" novalidate>
+    <div class="field">
+      <label for="username" id="userLabel">Student ID</label>
+      <input id="username" name="username" type="text" autocomplete="username"
+             placeholder="e.g. 2026-0701" aria-describedby="userError">
+      <div class="error" id="userError"></div>
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <div class="pw-wrap">
+        <input id="password" name="password" type="password" autocomplete="current-password"
+               placeholder="Enter your password" aria-describedby="passError">
+        <button type="button" class="toggle" id="toggle" aria-label="Show password">Show</button>
+      </div>
+      <div class="error" id="passError"></div>
+    </div>
+
+    <div class="field">
+      <label for="role">Sign in as</label>
+      <div class="select-wrap">
+        <select id="role" name="role">
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+          <option value="admin">Administrator</option>
+        </select>
+        <svg class="select-arrow" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="row">
+      <label class="remember" for="remember">
+        <input id="remember" name="remember" type="checkbox">
+        Remember me
+      </label>
+      <a href="#">Forgot password?</a>
+    </div>
+
+    <button class="submit" type="submit">Sign in</button>
+  </form>
+
+  <div class="foot">
+    <p class="foot-links">
+      <a href="index.html">&larr; Back to home</a>
+    </p>
+    <p class="foot-note">Students and faculty share this sign-in.<br>
+       Trouble signing in? Contact the ICT Office.</p>
+    <p class="foot-demo">
+      Demo sign-ins &mdash; student <strong>2026-0701</strong> / student123 &middot;
+      teacher <strong>EMP-00231</strong> / teacher123 &middot;
+      administrator <strong>ADMIN-0001</strong> / admin123
+    </p>
+  </div>
+</main>
+
+</body>
+</html>

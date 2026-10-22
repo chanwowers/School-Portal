@@ -1,0 +1,67 @@
+/* ------------------------------------------------------------------
+   theme.css — shared design tokens + base styles.
+   Linked by EVERY page before its own stylesheet, so page rules win.
+   Palette sampled from pictures/schoolpic.jpg.
+   Change a colour here and both pages follow.
+   ------------------------------------------------------------------ */
+
+:root {
+  --bg: #f2ece0;          /* cream walls */
+  --card: #fdfaf4;        /* sunlit plaster */
+  --ink: #33291f;         /* dark wood trim */
+  --muted: #7c6f5c;       /* weathered sandstone */
+  --line: #ddd0b8;        /* brick mortar */
+  --brand: #b0603f;       /* terracotta roof tile */
+  --brand-dark: #8d4a2e;  /* roof in shadow */
+  --brand-soft: #f6e7de;  /* tile highlight */
+  --sage: #66795e;        /* mango tree */
+  --danger: #8a2015;      /* entrance awning */
+  --focus: #dda98c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  color: var(--ink);
+}
+
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- shared components ----------
+   Used by more than one page, so they live here rather than being
+   duplicated in each page stylesheet. */
+
+/* icons: size + stroke; colour is inherited from the parent element */
+.ic {
+  width: 18px; height: 18px; flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* holds the page's icon <symbol> definitions; never rendered itself */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* floating help button, pinned bottom-right */
+.help {
+  position: fixed;
+  right: 18px; bottom: 18px;
+  z-index: 30;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fdf3e9;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(51, 41, 31, .35);
+}
+
+.help .ic { width: 20px; height: 20px; }

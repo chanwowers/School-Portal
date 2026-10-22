@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher Dashboard — School Portal</title>
+
+<!-- theme.css (tokens) → portal.css (sidebar + top bar) → teacher.css -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/portal.css?v=3">
+<link rel="stylesheet" href="css/teacher.css?v=4">
+
+<!-- defer keeps the scripts in order: shell → shared data → page -->
+<script defer src="js/portal.js?v=4"></script>
+<script defer src="js/store.js?v=3"></script>
+<script defer src="js/sync.js?v=1"></script>
+<script defer src="js/teacher.js?v=2"></script>
+</head>
+<body>
+
+<!-- Icon sprite. Inline because <use href="#id"> only resolves ids in the
+     same document, and an external .svg can't be fetched over file://. -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-home" viewBox="0 0 24 24">
+    <path d="M3 10.5 12 3l9 7.5"/>
+    <path d="M5.5 9.6V20a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9.6"/>
+  </symbol>
+  <symbol id="i-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8.2" r="3.6"/>
+    <path d="M4.9 20.4a7.1 7.1 0 0 1 14.2 0"/>
+  </symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24">
+    <path d="M9 4.5H7a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6.5a2 2 0 0 0-2-2h-2"/>
+    <rect x="9" y="2.6" width="6" height="3.6" rx="1.2"/>
+    <path d="M9 11.5h6M9 15.2h4"/>
+  </symbol>
+  <symbol id="i-file" viewBox="0 0 24 24">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+    <path d="M14 3v5h5"/><path d="M8.8 13h6.4M8.8 16.4h4"/>
+  </symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24">
+    <path d="M20.5 11.6a7.9 7.9 0 0 1-11.6 7L4 20.2l1.6-4.7a7.9 7.9 0 1 1 14.9-3.9z"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/>
+    <path d="M3.5 9.9h17"/><path d="M8 3v4M16 3v4"/>
+  </symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M12 7v5.2l3.4 2"/>
+  </symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24">
+    <path d="M18 9.5a6 6 0 1 0-12 0c0 5-2.2 6.6-2.2 6.6h16.4S18 14.5 18 9.5z"/>
+    <path d="M13.8 19.4a2.1 2.1 0 0 1-3.6 0"/>
+  </symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24">
+    <path d="M9.5 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.5"/>
+    <path d="m15.5 16.5 4.5-4.5-4.5-4.5"/><path d="M20 12H9"/>
+  </symbol>
+  <symbol id="i-help" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9.2"/>
+    <path d="M9.6 9.4a2.5 2.5 0 0 1 4.9.6c0 1.7-2.5 2.2-2.5 3.9"/>
+    <path d="M12 17.5h.01"/>
+  </symbol>
+</svg>
+
+<div class="shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo">
+        <img src="pictures/SchoolLogo.jpg" alt="" width="34" height="34">
+      </div>
+      <div>
+        <div class="sb-name">CAANHS</div>
+        <div class="sb-sub">Teacher Portal</div>
+      </div>
+    </div>
+
+    <nav class="sb-nav" aria-label="Main" data-teacher="true">
+      <a href="TeacherDashboard.html" aria-current="page"><svg class="ic"><use href="#i-home"/></svg>Dashboard</a>
+      <a href="TeacherClasses.html"><svg class="ic"><use href="#i-user"/></svg>Classes</a>
+      <a href="TeacherAttendance.html"><svg class="ic"><use href="#i-clipboard"/></svg>Attendance</a>
+      <a href="TeacherGrades.html"><svg class="ic"><use href="#i-file"/></svg>Grade Book</a>
+      <a href="TeacherAnnouncements.html"><svg class="ic"><use href="#i-chat"/></svg>Announcements</a>
+      <a href="Calendar.html"><svg class="ic"><use href="#i-calendar"/></svg>Academic Calendar</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+
+    <header class="topbar">
+      <button class="icon-btn" id="navToggle" type="button"
+              aria-controls="sidebar" aria-expanded="true" aria-label="Hide menu">
+        <svg class="ic" id="navToggleIcon"><use href="#i-x"/></svg>
+      </button>
+
+      <div class="tb-title">
+        <svg class="ic"><use href="#i-home"/></svg>
+        Teacher Dashboard
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="tb-user" id="tbUser">EMP-00231</div>
+
+      <button class="icon-btn bell" type="button" aria-label="Notifications, 1 unread">
+        <svg class="ic"><use href="#i-bell"/></svg>
+        <span class="dot" aria-hidden="true"></span>
+      </button>
+
+      <div class="tb-avatar" aria-hidden="true">TR</div>
+    </header>
+
+    <main class="content">
+      <p class="crumb">You are here: <a href="TeacherDashboard.html">Teacher Dashboard</a></p>
+
+      <div class="page-head">
+        <h1>Teacher Dashboard</h1>
+        <p>School Year 2026&ndash;2027 &middot; Second Quarter</p>
+      </div>
+
+      <section class="summary" aria-label="At a glance">
+        <div class="summary-item">
+          <div class="k">My classes</div>
+          <div class="v" id="statClasses">3</div>
+        </div>
+        <div class="summary-item">
+          <div class="k">Students</div>
+          <div class="v" id="statStudents">32</div>
+        </div>
+        <div class="summary-item">
+          <div class="k">Attendance today</div>
+          <div class="v pending" id="statAttendance">Not marked</div>
+        </div>
+        <div class="summary-item">
+          <div class="k">Announcements</div>
+          <div class="v" id="statAnnouncements">2</div>
+        </div>
+      </section>
+
+      <div class="dash-grid">
+        <div class="stack">
+
+          <section class="card">
+            <div class="card-head">
+              <svg class="ic"><use href="#i-clock"/></svg>
+              <h2>Today&rsquo;s schedule</h2>
+            </div>
+            <div class="schedule" id="scheduleList"></div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <svg class="ic"><use href="#i-chat"/></svg>
+              <h2>Recent announcements</h2>
+            </div>
+            <div class="ann-list" id="recentAnnouncements"></div>
+            <p class="card-foot"><a href="TeacherAnnouncements.html">Manage announcements &rarr;</a></p>
+          </section>
+
+        </div>
+
+        <aside class="stack" aria-label="Shortcuts">
+
+          <section class="card">
+            <div class="card-head">
+              <svg class="ic"><use href="#i-clipboard"/></svg>
+              <h2>Quick actions</h2>
+            </div>
+
+            <div class="quick-grid">
+              <a class="quick" href="TeacherAttendance.html">
+                <span class="quick-ico ico-sage" aria-hidden="true"><svg class="ic"><use href="#i-clipboard"/></svg></span>
+                <span><span class="t">Take attendance</span><span class="s">Mark today&rsquo;s roll</span></span>
+              </a>
+
+              <a class="quick" href="TeacherGrades.html">
+                <span class="quick-ico ico-gold" aria-hidden="true"><svg class="ic"><use href="#i-file"/></svg></span>
+                <span><span class="t">Open grade book</span><span class="s">Encode quarterly grades</span></span>
+              </a>
+
+              <a class="quick" href="TeacherAnnouncements.html">
+                <span class="quick-ico ico-brand" aria-hidden="true"><svg class="ic"><use href="#i-chat"/></svg></span>
+                <span><span class="t">Post an announcement</span><span class="s">Send an update to a class</span></span>
+              </a>
+
+              <a class="quick" href="Calendar.html">
+                <span class="quick-ico ico-sage" aria-hidden="true"><svg class="ic"><use href="#i-calendar"/></svg></span>
+                <span><span class="t">Academic calendar</span><span class="s">Exams, holidays, school events</span></span>
+              </a>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <svg class="ic"><use href="#i-user"/></svg>
+              <h2>Advisory</h2>
+            </div>
+            <p class="card-note">Grade 7 &ndash; Rizal is your advisory class.
+               Coordinate with the class officers and the guidance office for parent
+               conferences and student concerns.</p>
+            <p class="card-foot"><a href="TeacherClasses.html">View all classes &rarr;</a></p>
+          </section>
+
+        </aside>
+      </div>
+
+      <div class="logout-row">
+        <button class="logout" id="signout" type="button">
+          <svg class="ic"><use href="#i-logout"/></svg>
+          Logout
+        </button>
+      </div>
+
+      <p class="disclaimer">Demo data &mdash; attendance, grades and announcements are synced to
+         the school_portal database and cached in this browser. Contact the ICT Office
+         for account concerns.</p>
+    </main>
+
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+
+<button class="help" type="button" aria-label="Help">
+  <svg class="ic"><use href="#i-help"/></svg>
+</button>
+
+</body>
+</html>
